@@ -16,7 +16,7 @@ def load_zips():
 
 def call_census_api(zip_codes: list):
     zip_codes_list = ','.join(zip_codes)
-    variables = ["B01003_001E", "B06001_025E", "B06010_011E", "B09001_001E", "B14001_009E", "B14001_008E", "B17001_002E", "B02001_003E", "B21001_004E"]
+    variables = ["B06001_025E", "B01003_001E", "B06010_011E", "B09001_001E", "B14001_009E", "B14001_008E", "B17001_002E", "B02001_003E", "B21001_004E"]
     variables = ','.join(variables)
 
     # for testing purposes
@@ -36,7 +36,7 @@ def call_census_api(zip_codes: list):
     print()
     print(df.describe())
 
-    df.to_csv('ScrappedData.csv')
+    df.to_csv('ScrappedData.csv', index=False)
 
 
 if __name__ == "__main__":
