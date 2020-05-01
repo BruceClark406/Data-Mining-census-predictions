@@ -28,21 +28,27 @@ def visualize_variance_caught_by_PCA(normalized_data):
     plt.plot(np.cumsum(pca.explained_variance_ratio_), marker='x')
     plt.xlabel('number of principal components')
     plt.ylabel('cumulative explained variance')
-    plt.title('Explained variance in Wine data set along principal component directions')
+    plt.title('Explained variance by number of PCA variables')
     plt.show()
-
 
 
 if __name__ == "__main__":
 
-    df = pd.read_csv("ScrappedData.csv")
+    df = pd.read_csv("ScrapedData.csv")
+
+    # All quantitative (no one-hot encoding necessary)
+    # No missing values for returned data (no forward fill or any filling necessary)
 
     # shuffle the dataset with random seed
     df.sample(frac=1, random_state=1)
 
-    # grab target field from df
-    target = df["born out of state"]
-    df = df.drop(columns=["born out of state"])
+    # grab target (BOOS = Born out of state) field from df
+    target_BOOS = df["born out of state"]
+    zip_id = df["zipcode"]
+    df = df.drop(columns=["born out of state", "zipcode"])
+
+    # after looking at the visualization, I decided to drop: "total in poverty""
+    df = df.drop(columns=["total in poverty"])
 
     # perform standard normalization of all attributes
     normalized_data = preprocessing.normalize(df)
@@ -56,9 +62,4 @@ if __name__ == "__main__":
     # variance explained by PCA
     visualize_variance_caught_by_PCA(normalized_data)
 
-    #
-
-
-
-
-
+ 

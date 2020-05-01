@@ -36,7 +36,7 @@ def call_census_api(zip_codes: list):
     print()
     print(df.describe())
 
-    df.to_csv('ScrappedData.csv', index=False)
+    df.to_csv('ScrapedData.csv', index=False)
 
 
 if __name__ == "__main__":
