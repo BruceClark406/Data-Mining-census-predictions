@@ -58,11 +58,15 @@ def get_data():
     df = df.drop(columns=["born out of state", "zipcode"])
 
     # after looking at the visualization, I decided to drop: "total in poverty""
-    df = df.drop(columns=["total in poverty"])
+    df = df.drop(columns=["total in poverty", 'total African American'])
 
     # perform standard normalization of all attributes
     min_max_scaler = preprocessing.MinMaxScaler()
     normalized_data = preprocessing.normalize(df.to_numpy())
+
+    # tried reducing dem of data
+    # pca = PCA(5)
+    # normalized_data = pca.fit_transform(normalized_data)
 
     return df, target_BOOS, zip_id, normalized_data
 
