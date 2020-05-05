@@ -3,3 +3,5 @@
 API_KEY_SECRET.py
 __pycache__/API_KEY_SECRET.cpython-37.pyc
 Proposal.docx
+*.pyc
+__pycache__/DataAnalysis.cpython-37.pyc
