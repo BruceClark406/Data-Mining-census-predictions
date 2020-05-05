@@ -5,12 +5,12 @@ import matplotlib.pyplot as plt
 import sys
 from sklearn.decomposition import PCA
 
-def print_correlation_matrix(df):
+def print_correlation_matrix(normalized_data):
     print("Correlation Matrix")
     print(list(df.columns))
     np.set_printoptions(threshold=sys.maxsize)
     np.set_printoptions(linewidth=np.inf)
-    print(np.corrcoef(df.to_numpy().T))
+    print(np.corrcoef(normalized_data.T))
 
 
 def visulaize_with_PCA(normalized_data):
@@ -32,8 +32,18 @@ def visualize_variance_caught_by_PCA(normalized_data):
     plt.show()
 
 
-if __name__ == "__main__":
+def perform_all_visualizations(df, normalized_data):
+    # find correlation matrix
+    print_correlation_matrix(df)
 
+    # visualize the data
+    visulaize_with_PCA(normalized_data)
+
+    # variance explained by PCA
+    visualize_variance_caught_by_PCA(normalized_data)
+
+
+def get_data():
     df = pd.read_csv("ScrapedData.csv")
 
     # All quantitative (no one-hot encoding necessary)
@@ -51,15 +61,14 @@ if __name__ == "__main__":
     df = df.drop(columns=["total in poverty"])
 
     # perform standard normalization of all attributes
-    normalized_data = preprocessing.normalize(df)
+    min_max_scaler = preprocessing.MinMaxScaler()
+    normalized_data = preprocessing.normalize(df.to_numpy())
 
-    # find correlation matrix
-    print_correlation_matrix(df)
+    return df, target_BOOS, zip_id, normalized_data
 
-    # visualize the data
-    visulaize_with_PCA(normalized_data)
 
-    # variance explained by PCA
-    visualize_variance_caught_by_PCA(normalized_data)
+if __name__ == "__main__":
+    df, target_BOOS, zip_id, normalized_data = get_data()
 
- 
+    perform_all_visualizations(df, normalized_data)
+

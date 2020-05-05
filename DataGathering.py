@@ -38,7 +38,6 @@ def call_census_api(zip_codes: list):
 
     df.to_csv('ScrapedData.csv', index=False)
 
-
 if __name__ == "__main__":
     zip_code_array = load_zips()
     call_census_api(zip_code_array)
