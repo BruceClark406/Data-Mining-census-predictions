@@ -4,7 +4,6 @@ import json
 from API_KEY_SECRET import get_api_key
 
 
-
 def load_zips():
     f = open("zip_codes_cities_county.csv", "r")
     zip_code_list = []
